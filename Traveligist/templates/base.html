@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <body>
+  	{% load staticfiles %}
+    <header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'home' %}">
+  	<img src="{% static 'logo.png' %}" height="30" width="30" class="d-inline-block align-top"> 
+     Traveligist
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" ></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+       <li class="nav-item">
+        <a class="nav-link active"  href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+        <form id="logout" method="POST" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <input type="hidden">
+        </form>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link active"  href="{% url 'login' %}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'signup' %}">Sign up</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+</header><br>
+{% block content %}
+
+{% endblock %}
+<br>
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Jump to top</a>
+    </p>
+    <p class="text-center"> &copy;Traveligist {%now 'Y'%}
+    </p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
