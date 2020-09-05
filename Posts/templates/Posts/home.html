@@ -1,7 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
+<title>Traveligist🌍</title>
+{% for post in posts.all %}
+<div class="container">
+<div class="row pb-3">
+	<div class="col-2"  onclick="window.location='{% url 'details' post.id %}';" style="cursor: pointer;">
+		<img src="{{ post.icon.url }}" class="img-fluid">
+	</div>
+	<div class="col-6"  onclick="window.location='{% url 'details' post.id %}';" style="cursor: pointer;">
+		<h1>{{ post.title }}</h1>
+		<p>{{ post.summary }}</p>
+	</div>
+	<div class="col-2">
+		<a href="javascript:{document.getElementById('upvote{{post.id}}').submit()}"><button class="btn btn-primary btn-lg btn-block btn-fluid">🚀Upvote {{post.vote_total}}</button></a>
+	</div>
+</div>
+<form id="upvote{{post.id}}" method="POST" action="{% url 'upvote' post.id %}">
+	{% csrf_token %}
+	<input type="hidden">
+</form>
+</div>
+{% endfor %}
 
-"home!"
+
 
 {% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>{{ post.title }}🚩</title>
+<div class="container">
+	<div class="row">
+		<div class="col-2">
+			<img src="{{ post.icon.url }}" class="img-fluid">
+		</div>
+		<div class="col-7">
+			<a><h1>{{ post.title }}</h1></a>	
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-6">
+			<img src="{{ post.image.url }}" class="img-fluid">
+		</div>
+		<div class="col-2">
+			<a href="javascript:{document.getElementById('upvote').submit()}"><button class="btn btn-primary btn-lg btn-block btn-fluid">🚀Upvote {{post.vote_total}}</button></a>	
+		</div>
+	</div>
+	<div class="row pt-2">
+		<div class="col-4">
+			<h4>Explored by🚩 {{ post.explored_by.username }}</h4>
+		</div>
+		<div class="col-4" text-right>
+			<h4>🕓{{ post.pub_date_pretty }}</h4>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-8">
+			<p>Summary:<br>{{ post.body }}</p>
+		</div>
+	</div> 
+</div>
+<form id="upvote" method="POST" action="{% url 'upvote' post.id %}">
+	{% csrf_token %}
+	<input type="hidden">
+</form>
+
+{% endblock %}
